@@ -3,8 +3,11 @@ package cz.terahouska.services;
 import cz.terahouska.dto.ProductDTO;
 import cz.terahouska.dto.mappers.ProductMapper;
 import cz.terahouska.entities.ProductEntity;
+import cz.terahouska.entities.filters.ProductTypeFilter;
 import cz.terahouska.entities.repositories.ProductRepository;
+import cz.terahouska.entities.repositories.specification.ProductTypeSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +20,10 @@ public class ProductService {
     @Autowired
     ProductMapper productMapper;
 
-    public List<ProductDTO> getSowVegetables() {
-        return productRepository.findAll()
+    public List<ProductDTO> getSowProducts(ProductTypeFilter filter) {
+        ProductTypeSpecification specification = new ProductTypeSpecification(filter);
+
+        return productRepository.findAll(specification, PageRequest.of(0, filter.getLimit()))
                 .stream()
                 .map(productEntity -> productMapper.toDTO(productEntity))
                 .collect(Collectors.toList());

@@ -1,6 +1,8 @@
 package cz.terahouska.controllers;
 
+import cz.terahouska.constant.ProductType;
 import cz.terahouska.dto.ProductDTO;
+import cz.terahouska.entities.filters.ProductTypeFilter;
 import cz.terahouska.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +20,22 @@ public class SowController {
 
     @GetMapping("/vegetables")
     public List<ProductDTO> getVegetables() {
-        return productService.getSowVegetables();
+        ProductTypeFilter filter = new ProductTypeFilter();
+        filter.setType(ProductType.SOW_VEGETABLE);
+        return productService.getSowProducts(filter);
     }
 
+    @GetMapping("/flowers")
+    public List<ProductDTO> getFlowers() {
+        ProductTypeFilter filter = new ProductTypeFilter();
+        filter.setType(ProductType.SOW_FLOWER);
+        return productService.getSowProducts(filter);
+    }
+
+    @GetMapping("/herbs")
+    public List<ProductDTO> getHerbs() {
+        ProductTypeFilter filter = new ProductTypeFilter();
+        filter.setType(ProductType.SOW_HERB);
+        return productService.getSowProducts(filter);
+    }
 }
