@@ -2,7 +2,9 @@ package cz.terahouska.services;
 
 import cz.terahouska.dto.FlowerDTO;
 import cz.terahouska.dto.mappers.FlowerMapper;
+import cz.terahouska.entities.FlowerEntity;
 import cz.terahouska.entities.repositories.FlowerRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +26,19 @@ public class FlowerService {
 
     public FlowerDTO addFlower(FlowerDTO sourceDTO) {
         return flowerMapper.toDTO(flowerRepository.save(flowerMapper.toEntity(sourceDTO)));
+    }
+
+    public FlowerDTO editFlower(FlowerDTO sourceDTO, long id) {
+        if (!flowerRepository.existsById(id))
+            throw new EntityNotFoundException("id nebylo nalezeno v databázi");
+        sourceDTO.setId(id);
+
+        return addFlower(sourceDTO);
+    }
+
+    public void deleteFlower(long id) {
+        if (!flowerRepository.existsById(id))
+            throw new EntityNotFoundException("id nebylo nalezeno v databázi");
+        flowerRepository.deleteById(id);
     }
 }

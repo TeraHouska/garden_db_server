@@ -18,8 +18,4 @@ public class FlowerController {
         return flowerService.getAllFlowers();
     }
 
-    @PostMapping("/add")
-    public FlowerDTO addFlower(@RequestBody FlowerDTO sourceDTO) {
-        return flowerService.addFlower(sourceDTO);
-    }
 }
