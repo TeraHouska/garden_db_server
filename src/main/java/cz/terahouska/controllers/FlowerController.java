@@ -1,5 +1,7 @@
 package cz.terahouska.controllers;
 
+import cz.terahouska.constant.Color;
+import cz.terahouska.constant.Site;
 import cz.terahouska.dto.FlowerDTO;
 import cz.terahouska.services.FlowerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +23,15 @@ public class FlowerController {
     @GetMapping("/{id}")
     public FlowerDTO getFlowerDetail(@PathVariable long id) {
         return flowerService.getFlowerDetail(id);
+    }
+
+    @GetMapping("/colors")
+    public Color[] getColors() {
+        return Color.values();
+    }
+
+    @GetMapping("/sites")
+    public Site[] getSites() {
+        return Site.values();
     }
 }

@@ -51,4 +51,9 @@ public class ProductController {
     public ProductDTO getProductDetail(@PathVariable long id) {
         return productService.getProductDetail(id);
     }
+
+    @GetMapping("/types")
+    public ProductType[] getTypes() {
+        return ProductType.values();
+    }
 }
