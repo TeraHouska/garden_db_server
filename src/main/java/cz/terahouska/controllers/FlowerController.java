@@ -18,4 +18,8 @@ public class FlowerController {
         return flowerService.getAllFlowers();
     }
 
+    @GetMapping("/{id}")
+    public FlowerDTO getFlowerDetail(@PathVariable long id) {
+        return flowerService.getFlowerDetail(id);
+    }
 }

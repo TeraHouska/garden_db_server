@@ -24,21 +24,29 @@ public class FlowerService {
                 .collect(Collectors.toList());
     }
 
+    public FlowerDTO getFlowerDetail(long id) {
+        checkIfExistsOrThrow(id);
+        return flowerMapper.toDTO(flowerRepository.getReferenceById(id));
+    }
+
     public FlowerDTO addFlower(FlowerDTO sourceDTO) {
         return flowerMapper.toDTO(flowerRepository.save(flowerMapper.toEntity(sourceDTO)));
     }
 
     public FlowerDTO editFlower(FlowerDTO sourceDTO, long id) {
-        if (!flowerRepository.existsById(id))
-            throw new EntityNotFoundException("id nebylo nalezeno v databázi");
+        checkIfExistsOrThrow(id);
         sourceDTO.setId(id);
 
         return addFlower(sourceDTO);
     }
 
     public void deleteFlower(long id) {
+        checkIfExistsOrThrow(id);
+        flowerRepository.deleteById(id);
+    }
+
+    private void checkIfExistsOrThrow(long id) {
         if (!flowerRepository.existsById(id))
             throw new EntityNotFoundException("id nebylo nalezeno v databázi");
-        flowerRepository.deleteById(id);
     }
 }
