@@ -1,5 +1,6 @@
 package cz.terahouska.dto;
 
+import cz.terahouska.constant.Color;
 import cz.terahouska.constant.Site;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,4 +33,6 @@ public class FlowerDTO {
     private Boolean resilient;
 
     private List<Site> sites;
+
+    private List<Color> colors;
 }

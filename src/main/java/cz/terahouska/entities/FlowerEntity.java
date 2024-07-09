@@ -1,5 +1,6 @@
 package cz.terahouska.entities;
 
+import cz.terahouska.constant.Color;
 import cz.terahouska.constant.Site;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,6 +8,12 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
+
+/*
+Avoided extending ProductEntity
+@ElementCollection did not work as intended
+some attributes would be redundant
+*/
 
 @Entity(name = "flower")
 @Getter
@@ -43,4 +50,8 @@ public class FlowerEntity {
     @ElementCollection
     @Enumerated(EnumType.STRING)
     private List<Site> sites;
+
+    @ElementCollection
+    @Enumerated(EnumType.STRING)
+    private List<Color> colors;
 }
