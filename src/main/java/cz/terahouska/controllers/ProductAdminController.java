@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
-public class AdminController {
+@RequestMapping("/api/product")
+public class ProductAdminController {
 
     @Autowired
     ProductService productService;

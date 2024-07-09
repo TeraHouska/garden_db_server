@@ -20,13 +20,20 @@ public class ProductService {
     @Autowired
     ProductMapper productMapper;
 
-    public List<ProductDTO> getSowProducts(ProductTypeFilter filter) {
+    public List<ProductDTO> getProducts(ProductTypeFilter filter) {
         ProductTypeSpecification specification = new ProductTypeSpecification(filter);
 
         return productRepository.findAll(specification, PageRequest.of(0, filter.getLimit()))
                 .stream()
                 .map(productEntity -> productMapper.toDTO(productEntity))
                 .collect(Collectors.toList());
+    }
+
+    public ProductDTO getProductDetail(long id) {
+        if (productRepository.existsById(id)) {
+            return productMapper.toDTO(productRepository.getReferenceById(id));
+        }
+        return null;
     }
 
     public ProductDTO addProduct(ProductDTO sourceDTO) {
