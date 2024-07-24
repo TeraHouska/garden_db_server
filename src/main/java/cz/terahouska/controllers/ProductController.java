@@ -19,7 +19,7 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @GetMapping("/vegetables")
+    @GetMapping("/sow_vegetables")
     public List<ProductDTO> getVegetables() {
         ProductTypeFilter filter = new ProductTypeFilter();
         filter.setType(ProductType.SOW_VEGETABLE);
