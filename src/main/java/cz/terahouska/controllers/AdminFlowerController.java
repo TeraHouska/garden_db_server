@@ -3,11 +3,14 @@ package cz.terahouska.controllers;
 import cz.terahouska.dto.FlowerDTO;
 import cz.terahouska.services.FlowerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/flower")
-public class FlowerAdminController {
+@Secured("ROLE_ADMIN")
+public class AdminFlowerController {
     @Autowired
     FlowerService flowerService;
 
